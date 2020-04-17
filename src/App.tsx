@@ -3,7 +3,7 @@ import './App.css';
 import Board from './Board';
 import { GAME_SIZE } from './settings/constants';
 
-function App() {
+const App:React.FC = () => {
   return (
     <div className="App">
       <div
