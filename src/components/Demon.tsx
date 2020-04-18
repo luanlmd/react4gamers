@@ -1,8 +1,11 @@
 import React from 'react';
-import './index.css';
 import { TILE_SIZE, DEMON_TIME_SIZE } from '../settings/constants';
+import useEnemyMovement from '../hooks/useEnemyMovement';
 
 const Demon:React.FC = () => {
+
+    const { positionX, positionY, direction } = useEnemyMovement();
+    
     return (
         <div style={{
             position:'absolute',
@@ -10,9 +13,10 @@ const Demon:React.FC = () => {
             backgroundRepeat: 'no-repeat',
             width:DEMON_TIME_SIZE,
             height:DEMON_TIME_SIZE,
-            bottom:TILE_SIZE*5,
-            left:TILE_SIZE*10,
-            animation: 'demon-animation 0.8s steps(4) infinite'
+            bottom:TILE_SIZE * positionY,
+            left:TILE_SIZE * positionX,
+            animation: 'demon-animation 0.8s steps(4) infinite',
+            transform:`scaleX(${direction})`
         }} />
     )
 }

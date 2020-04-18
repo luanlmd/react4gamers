@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Board from './Board';
+import Board from './components/Board';
 import { GAME_SIZE } from './settings/constants';
 
 const App:React.FC = () => {

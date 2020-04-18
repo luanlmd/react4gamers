@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.css';
 import { TILE_SIZE, HERO_HEAD_OFFSET } from '../settings/constants';
 
 const Trap:React.FC = () => {

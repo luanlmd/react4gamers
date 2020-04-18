@@ -6,3 +6,48 @@
   text-align: center;
   height: 100vh;
 }
+
+@keyframes hero-animation {
+  from {
+      background-position-x: 0;
+  }
+  to {
+      background-position-x: -192px;
+  }
+}
+
+@keyframes chest-animation {
+  from {
+      background-position-x: 0;
+  }
+  to {
+      background-position-x: -144px;
+  }
+}
+
+@keyframes demon-animation {
+  from {
+      background-position-x: 0;
+  }
+  to {
+      background-position-x: -384px;
+  }
+}
+
+@keyframes mini-demon-animation {
+  from {
+      background-position-x: 0;
+  }
+  to {
+      background-position-x: -192px;
+  }
+}
+
+@keyframes trap-animation {
+  from {
+      background-position-x: 0;
+  }
+  to {
+      background-position-x: -384px;
+  }
+}
