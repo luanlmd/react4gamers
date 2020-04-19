@@ -18,10 +18,10 @@ const useHeroMovement = ()  => {
             setHeroDirection(1);
         }
         else if (e.key === EDirection.Up) {
-            setHeroPositionY(heroPositionY + 1)
+            setHeroPositionY(heroPositionY - 1)
         }
         else if (e.key === EDirection.Down) {
-            setHeroPositionY(heroPositionY - 1)
+            setHeroPositionY(heroPositionY + 1)
         }
     });
 

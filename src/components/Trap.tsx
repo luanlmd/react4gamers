@@ -9,7 +9,7 @@ const Trap:React.FC = () => {
             backgroundPosition: `0 -${TILE_SIZE - HERO_HEAD_OFFSET}px`,
             width:TILE_SIZE,
             height:TILE_SIZE + HERO_HEAD_OFFSET,
-            bottom:TILE_SIZE*3,
+            top:TILE_SIZE*3,
             left:TILE_SIZE*15,
             animation: 'trap-animation 0.8s steps(8) infinite'
         }} />

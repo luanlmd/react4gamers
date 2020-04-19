@@ -14,7 +14,7 @@ const Hero:React.FC = () => {
             backgroundPosition: `0 -${TILE_SIZE - HERO_HEAD_OFFSET}px`,
             width:TILE_SIZE,
             height:TILE_SIZE + HERO_HEAD_OFFSET,
-            bottom:TILE_SIZE * heroPositionY,
+            top:TILE_SIZE * heroPositionY,
             left:TILE_SIZE * heroPositionX,
             animation: 'hero-animation 0.8s steps(4) infinite',
             transform:`scaleX(${heroDirection})`

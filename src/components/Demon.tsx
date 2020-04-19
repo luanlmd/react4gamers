@@ -13,7 +13,7 @@ const Demon:React.FC = () => {
             backgroundRepeat: 'no-repeat',
             width:DEMON_TIME_SIZE,
             height:DEMON_TIME_SIZE,
-            bottom:TILE_SIZE * positionY,
+            top:TILE_SIZE * positionY,
             left:TILE_SIZE * positionX,
             animation: 'demon-animation 0.8s steps(4) infinite',
             transform:`scaleX(${direction})`

@@ -2,8 +2,15 @@ import React from 'react';
 import { TILE_SIZE, HERO_HEAD_OFFSET } from '../settings/constants';
 import useEnemyMovement from '../hooks/useEnemyMovement';
 
-const MiniDemon:React.FC = () => {
-    const { positionX, positionY, direction } = useEnemyMovement();
+interface IProps
+{
+    x: number,
+    y: number
+}
+
+const MiniDemon:React.FC<IProps> = (props) => {
+
+    const { positionX, positionY, direction } = useEnemyMovement({x: props.x, y:props.y});
 
     return (
         <div style={{
@@ -13,7 +20,7 @@ const MiniDemon:React.FC = () => {
             backgroundPosition: `0 -${TILE_SIZE - HERO_HEAD_OFFSET}px`,
             width:TILE_SIZE,
             height:TILE_SIZE + HERO_HEAD_OFFSET,
-            bottom:TILE_SIZE * positionY,
+            top:TILE_SIZE * positionY,
             left:TILE_SIZE * positionX,
             animation: 'mini-demon-animation 0.8s steps(4) infinite',
             transform:`scaleX(${direction})`

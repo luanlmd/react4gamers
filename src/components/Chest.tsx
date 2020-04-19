@@ -9,7 +9,7 @@ const Chest:React.FC = () => {
             backgroundPosition: `0 -${TILE_SIZE}px`,
             width:TILE_SIZE,
             height:TILE_SIZE,
-            bottom:TILE_SIZE*15,
+            top:TILE_SIZE*15,
             left:TILE_SIZE*5,
             animation: 'chest-animation 0.8s steps(3) infinite'
         }} />

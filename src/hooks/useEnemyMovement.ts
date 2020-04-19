@@ -2,10 +2,15 @@ import { useState } from "react";
 import useInterval from '@use-it/interval';
 import { EDirection } from "../settings/constants";
 
-const useEnemyMovement = ()  => {
+interface IProps {
+    x: number,
+    y: number
+}
 
-    const [positionX, setPositionX] = useState(10);
-    const [positionY, setPositionY] = useState(10);
+const useEnemyMovement = (initialPosition?: IProps)  => {
+
+    const [positionX, setPositionX] = useState(initialPosition?.x || 10);
+    const [positionY, setPositionY] = useState(initialPosition?.y || 10);
     const [direction, setDirection] = useState(1);
 
     useInterval(() => {
@@ -22,10 +27,10 @@ const useEnemyMovement = ()  => {
             setDirection(1);
         }
         else if (randomDirection === EDirection.Up) {
-            setPositionY(positionY + 1)
+            setPositionY(positionY - 1)
         }
         else if (randomDirection === EDirection.Down) {
-            setPositionY(positionY - 1)
+            setPositionY(positionY + 1)
         }
     }, 2000);
 
