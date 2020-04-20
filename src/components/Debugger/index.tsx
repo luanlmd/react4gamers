@@ -6,6 +6,7 @@ interface ITile {
     x: number, 
     y: number,
     text: string;
+    key: string;
 }
 
 export const getCanvas = () => {
@@ -16,7 +17,8 @@ export const getCanvas = () => {
         for (let x = 0; x < canvasY.length; x++) {
             const canvasYX = canvasY[x];
             const text = (canvas[y][x] || canvasYX).toString();
-            const tileObj: ITile = { x, y, text }
+            const key = `${x}-${y}`
+            const tileObj: ITile = { x, y, text, key }
             tiles.push(tileObj)
         }
     }
@@ -31,7 +33,7 @@ const Debugger: React.FC = () => {
     return (
         <>
         {tiles.map((tile: ITile) => (
-            <Tile x={tile.x} y={tile.y} text={tile.text}></Tile>
+            <Tile key={tile.key} x={tile.x} y={tile.y} text={tile.text}></Tile>
         ))}
         </>
     );

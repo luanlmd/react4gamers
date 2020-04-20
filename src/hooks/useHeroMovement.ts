@@ -2,10 +2,15 @@ import { useState } from "react";
 import useEventListener from '@use-it/event-listener';
 import { EDirection } from "../settings/constants";
 
-const useHeroMovement = ()  => {
+interface IProps {
+    x: number,
+    y: number
+}
 
-    const [heroPositionX, setHeroPositionX] = useState(0);
-    const [heroPositionY, setHeroPositionY] = useState(0);
+const useHeroMovement = (initialPosition: IProps)  => {
+
+    const [heroPositionX, setHeroPositionX] = useState(initialPosition.x);
+    const [heroPositionY, setHeroPositionY] = useState(initialPosition.y);
     const [heroDirection, setHeroDirection] = useState(1);
 
     useEventListener('keydown', (e: any) => {

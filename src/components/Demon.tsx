@@ -2,9 +2,15 @@ import React from 'react';
 import { TILE_SIZE, DEMON_TIME_SIZE } from '../settings/constants';
 import useEnemyMovement from '../hooks/useEnemyMovement';
 
-const Demon:React.FC = () => {
+interface IProps
+{
+    x: number,
+    y: number
+}
 
-    const { positionX, positionY, direction } = useEnemyMovement();
+const Demon:React.FC<IProps> = (props) => {
+
+    const { positionX, positionY, direction } = useEnemyMovement({x: props.x, y:props.y});
     
     return (
         <div style={{
@@ -15,8 +21,8 @@ const Demon:React.FC = () => {
             height:DEMON_TIME_SIZE,
             top:TILE_SIZE * positionY,
             left:TILE_SIZE * positionX,
+            transform:`scaleX(${direction})`,
             animation: 'demon-animation 0.8s steps(4) infinite',
-            transform:`scaleX(${direction})`
         }} />
     )
 }

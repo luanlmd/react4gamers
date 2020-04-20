@@ -2,9 +2,15 @@ import { TILE_SIZE, HERO_HEAD_OFFSET } from '../settings/constants';
 import useHeroMovement from '../hooks/useHeroMovement';
 import React from 'react';
 
-const Hero:React.FC = () => {
+interface IProps
+{
+    x: number,
+    y: number
+}
 
-    const { heroPositionX, heroPositionY, heroDirection } = useHeroMovement();
+const Hero:React.FC<IProps> = (props) => {
+
+    const { heroPositionX, heroPositionY, heroDirection } = useHeroMovement({x: props.x, y:props.y});
 
     return (
         <div style={{
@@ -14,7 +20,7 @@ const Hero:React.FC = () => {
             backgroundPosition: `0 -${TILE_SIZE - HERO_HEAD_OFFSET}px`,
             width:TILE_SIZE,
             height:TILE_SIZE + HERO_HEAD_OFFSET,
-            top:TILE_SIZE * heroPositionY,
+            top:TILE_SIZE * heroPositionY - HERO_HEAD_OFFSET,
             left:TILE_SIZE * heroPositionX,
             animation: 'hero-animation 0.8s steps(4) infinite',
             transform:`scaleX(${heroDirection})`

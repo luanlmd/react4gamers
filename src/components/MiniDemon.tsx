@@ -20,7 +20,7 @@ const MiniDemon:React.FC<IProps> = (props) => {
             backgroundPosition: `0 -${TILE_SIZE - HERO_HEAD_OFFSET}px`,
             width:TILE_SIZE,
             height:TILE_SIZE + HERO_HEAD_OFFSET,
-            top:TILE_SIZE * positionY,
+            top:TILE_SIZE * positionY - 15,
             left:TILE_SIZE * positionX,
             animation: 'mini-demon-animation 0.8s steps(4) infinite',
             transform:`scaleX(${direction})`
