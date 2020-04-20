@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useInterval from '@use-it/interval';
-import { EDirection } from "../settings/constants";
+import { EDirection, isMovementValid } from "../settings/constants";
 
 interface IProps {
     x: number,
@@ -14,23 +14,31 @@ const useEnemyMovement = (initialPosition?: IProps)  => {
     const [direction, setDirection] = useState(1);
 
     useInterval(() => {
+        let newX = positionX;
+        let newY = positionY;
+
         const random = Math.floor(Math.random() * 4);
         const directions = Object.values(EDirection);
         const randomDirection = directions[random];
 
         if (randomDirection === EDirection.Left) {
-            setPositionX(positionX - 1)
+            newX = positionX - 1
             setDirection(-1);
         }   
         else if (randomDirection === EDirection.Right) {
-            setPositionX(positionX + 1)
+            newX = positionX + 1
             setDirection(1);
         }
         else if (randomDirection === EDirection.Up) {
-            setPositionY(positionY - 1)
+            newY = positionY - 1
         }
         else if (randomDirection === EDirection.Down) {
-            setPositionY(positionY + 1)
+            newY = positionY + 1
+        }
+
+        if (isMovementValid({x:newX, y:newY})) {
+            setPositionX(newX);
+            setPositionY(newY);
         }
     }, 2000);
 

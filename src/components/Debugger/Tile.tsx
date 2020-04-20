@@ -33,7 +33,8 @@ const Tile:React.FC<IProps> = (props) => {
         fontSize: '30px',
         color: tileColor(),
         left: TILE_SIZE*props.x,
-        top: TILE_SIZE*props.y
+        top: TILE_SIZE*props.y,
+        zIndex:1
     }}>{props.text}</div>)
 }
 

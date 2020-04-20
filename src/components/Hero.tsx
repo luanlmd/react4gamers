@@ -10,7 +10,7 @@ interface IProps
 
 const Hero:React.FC<IProps> = (props) => {
 
-    const { heroPositionX, heroPositionY, heroDirection } = useHeroMovement({x: props.x, y:props.y});
+    const { positionX, positionY, direction } = useHeroMovement({x: props.x, y:props.y});
 
     return (
         <div style={{
@@ -20,10 +20,10 @@ const Hero:React.FC<IProps> = (props) => {
             backgroundPosition: `0 -${TILE_SIZE - HERO_HEAD_OFFSET}px`,
             width:TILE_SIZE,
             height:TILE_SIZE + HERO_HEAD_OFFSET,
-            top:TILE_SIZE * heroPositionY - HERO_HEAD_OFFSET,
-            left:TILE_SIZE * heroPositionX,
+            top:TILE_SIZE * positionY - HERO_HEAD_OFFSET,
+            left:TILE_SIZE * positionX,
             animation: 'hero-animation 0.8s steps(4) infinite',
-            transform:`scaleX(${heroDirection})`
+            transform:`scaleX(${direction})`
         }} />
     )
 }

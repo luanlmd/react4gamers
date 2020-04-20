@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useEventListener from '@use-it/event-listener';
-import { EDirection } from "../settings/constants";
+import { EDirection, isMovementValid } from "../settings/constants";
 
 interface IProps {
     x: number,
@@ -9,28 +9,35 @@ interface IProps {
 
 const useHeroMovement = (initialPosition: IProps)  => {
 
-    const [heroPositionX, setHeroPositionX] = useState(initialPosition.x);
-    const [heroPositionY, setHeroPositionY] = useState(initialPosition.y);
-    const [heroDirection, setHeroDirection] = useState(1);
+    const [positionX, setPositionX] = useState(initialPosition.x);
+    const [positionY, setPositionY] = useState(initialPosition.y);
+    const [direction, setDirection] = useState(1);
 
     useEventListener('keydown', (e: any) => {
+        let newX = positionX;
+        let newY = positionY;
+
         if (e.key === EDirection.Left) {
-            setHeroPositionX(heroPositionX - 1)
-            setHeroDirection(-1);
+            newX = positionX - 1
+            setDirection(-1);
         }   
         else if (e.key === EDirection.Right) {
-            setHeroPositionX(heroPositionX + 1)
-            setHeroDirection(1);
+            newX = positionX + 1
+            setDirection(1);
         }
         else if (e.key === EDirection.Up) {
-            setHeroPositionY(heroPositionY - 1)
+            newY = positionY - 1
         }
         else if (e.key === EDirection.Down) {
-            setHeroPositionY(heroPositionY + 1)
+            newY = positionY + 1
+        }
+
+        if (isMovementValid({x:newX, y:newY})) {
+            setPositionX(newX);
+            setPositionY(newY);
         }
     });
 
-    return { heroPositionX, heroPositionY, heroDirection };
+    return { positionX, positionY, direction };
 }
-
 export default useHeroMovement;

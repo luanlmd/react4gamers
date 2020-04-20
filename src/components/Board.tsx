@@ -48,7 +48,7 @@ const Board:React.FC = () => {
                 return <Trap key={tile.key} x={tile.x} y={tile.y}></Trap>
             else if (tile.text ===  ECanvas.MiniDemon)
                 return <MiniDemon key={tile.key} x={tile.x} y={tile.y}></MiniDemon>
-            return;
+            return <></>;
         })}
 
         <Debugger></Debugger>
