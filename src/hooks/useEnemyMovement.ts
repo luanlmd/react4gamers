@@ -1,6 +1,21 @@
 import { useState } from "react";
 import useInterval from '@use-it/interval';
-import { EDirection, isMovementValid } from "../settings/constants";
+import { EDirection, canvas, ECanvas } from "../settings/constants";
+
+interface IPosition {
+    x: number,
+    y: number,
+}
+
+export const computeMovement = (nextPosition: IPosition) => {
+    const nextValue = canvas[nextPosition.y][nextPosition.x];
+
+    const validCanvas = [ECanvas.Floor, ECanvas.Chest, ECanvas.Trap, ECanvas.MiniDemon, ECanvas.Demon, ECanvas.Hero]
+    return {
+        isValid: validCanvas.indexOf(nextValue) > -1,
+        kill: nextValue === ECanvas.Hero,
+    }
+}
 
 interface IProps {
     x: number,
@@ -36,7 +51,8 @@ const useEnemyMovement = (initialPosition?: IProps)  => {
             newY = positionY + 1
         }
 
-        if (isMovementValid({x:newX, y:newY})) {
+        const movement = computeMovement({x:newX, y:newY});
+        if (movement.isValid) {
             setPositionX(newX);
             setPositionY(newY);
         }

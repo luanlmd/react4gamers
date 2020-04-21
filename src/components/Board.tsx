@@ -51,7 +51,6 @@ const Board:React.FC = () => {
             return <></>;
         })}
 
-        <Debugger></Debugger>
         <img src="./assets/tileset.gif" alt="" width={GAME_SIZE} height={GAME_SIZE} />
         </>
     )

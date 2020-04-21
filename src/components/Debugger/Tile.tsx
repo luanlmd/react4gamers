@@ -23,6 +23,12 @@ const Tile:React.FC<IProps> = (props) => {
         else if (props.text === ECanvas.Trap) {
             return 'green';
         }
+        else if (props.text === ECanvas.Demon) {
+            return 'red';
+        }
+        else if (props.text === ECanvas.MiniDemon) {
+            return 'purple';
+        }
     }
 
     return(<div style={{

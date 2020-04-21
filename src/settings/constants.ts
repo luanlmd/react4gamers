@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const TILE_SIZE = 48
 export const GAME_SIZE = 20*48;
 export const DEMON_TIME_SIZE = TILE_SIZE * 2;
@@ -54,26 +52,3 @@ export const canvas = [
     [WL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, WL],
     [WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL]
 ];
-
-interface IPosition {
-    x: number,
-    y: number,
-}
-
-export const isMovementValid = (nextPosition: IPosition) => {
-    const nextValue = canvas[nextPosition.y][nextPosition.x];
-
-    if (nextValue ===  ECanvas.Wall) {
-        return false;
-    }
-
-    else if (nextValue ===  ECanvas.Trap) {
-        console.log('stepped on trap!');
-    }
-
-    else if (nextValue ===  ECanvas.Chest) {
-        console.log('you found a chest!');
-    }
-
-    return true;
-}

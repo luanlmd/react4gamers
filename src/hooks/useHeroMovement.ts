@@ -1,6 +1,26 @@
 import { useState } from "react";
 import useEventListener from '@use-it/event-listener';
-import { EDirection, isMovementValid } from "../settings/constants";
+import { EDirection, canvas, ECanvas } from "../settings/constants";
+
+interface IPosition {
+    x: number,
+    y: number,
+}
+
+export const computeMovement = (nextPosition: IPosition) => {
+    const nextValue = canvas[nextPosition.y][nextPosition.x];
+
+    const validCanvas = [ECanvas.Floor, ECanvas.Chest, ECanvas.Trap, ECanvas.MiniDemon, ECanvas.Demon, ECanvas.Door]
+    const dieCanvas = [ECanvas.Trap, ECanvas.MiniDemon, ECanvas.Demon];
+
+    console.log(validCanvas.indexOf(nextValue));
+    return {
+        isValid: validCanvas.indexOf(nextValue) > -1,
+        die: dieCanvas.indexOf(nextValue) > -1,
+        chest: nextValue === ECanvas.Chest,
+        exit: nextValue === ECanvas.Door
+    }
+}
 
 interface IProps {
     x: number,
@@ -32,7 +52,16 @@ const useHeroMovement = (initialPosition: IProps)  => {
             newY = positionY + 1
         }
 
-        if (isMovementValid({x:newX, y:newY})) {
+        const movement = computeMovement({x:newX, y:newY});
+        if (movement.die) {
+            alert('Morreu labigó!');
+        }
+
+        if (movement.exit) {
+            alert('Saiu!!! eeeee!!');
+        }
+
+        if (movement.isValid) {
             setPositionX(newX);
             setPositionY(newY);
         }
