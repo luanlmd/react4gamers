@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useInterval from '@use-it/interval';
-import { EDirection, canvas, ECanvas } from "../settings/constants";
+import { EDirection, ECanvas } from "../settings/constants";
+import { CanvasContext } from "../App";
 
 interface IPosition {
     x: number,
     y: number,
 }
 
-export const computeMovement = (nextPosition: IPosition) => {
+export const computeMovement = (canvas: ECanvas[][], nextPosition: IPosition) => {
     const nextValue = canvas[nextPosition.y][nextPosition.x];
 
-    const validCanvas = [ECanvas.Floor, ECanvas.Chest, ECanvas.Trap, ECanvas.MiniDemon, ECanvas.Demon, ECanvas.Hero]
+    const validCanvas = [ECanvas.Floor, ECanvas.MiniDemon, ECanvas.Demon, ECanvas.Hero]
     return {
         isValid: validCanvas.indexOf(nextValue) > -1,
         kill: nextValue === ECanvas.Hero,
@@ -22,11 +23,12 @@ interface IProps {
     y: number
 }
 
-const useEnemyMovement = (initialPosition?: IProps)  => {
+const useEnemyMovement = (initialPosition: IProps)  => {
 
-    const [positionX, setPositionX] = useState(initialPosition?.x || 10);
-    const [positionY, setPositionY] = useState(initialPosition?.y || 10);
+    const positionX = initialPosition.x;
+    const positionY = initialPosition.y;
     const [direction, setDirection] = useState(1);
+    const { canvas, setCanvas } = useContext(CanvasContext);
 
     useInterval(() => {
         let newX = positionX;
@@ -51,10 +53,20 @@ const useEnemyMovement = (initialPosition?: IProps)  => {
             newY = positionY + 1
         }
 
-        const movement = computeMovement({x:newX, y:newY});
+        const movement = computeMovement(canvas, {x:newX, y:newY});
         if (movement.isValid) {
-            setPositionX(newX);
-            setPositionY(newY);
+
+            const newCanvas = canvas;
+            const who = newCanvas[positionY][positionX];
+            newCanvas[positionY][positionX] = newCanvas[newY][newX];
+            newCanvas[newY][newX] = who;
+
+            console.log('who', who);
+            
+            setCanvas(newCanvas);
+
+            //setPositionX(newX);
+            //setPositionY(newY);
         }
     }, 2000);
 

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Tile from './Tile';
-import { canvas } from '../../settings/constants';
+import { CanvasContext } from '../../App';
 
 interface ITile {
     x: number, 
@@ -9,7 +9,7 @@ interface ITile {
     key: string;
 }
 
-export const getCanvas = () => {
+export const getCanvas = (canvas: any) => {
     const tiles = [];
 
     for (let y = 0; y< canvas.length; y++) {
@@ -28,7 +28,8 @@ export const getCanvas = () => {
 
 const Debugger: React.FC = () => {
 
-    const tiles = getCanvas();
+    const { canvas } = useContext(CanvasContext);
+    const tiles = getCanvas(canvas);
     
     return (
         <>

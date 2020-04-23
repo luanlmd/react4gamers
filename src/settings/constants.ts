@@ -30,7 +30,7 @@ const DE = ECanvas.Demon;
 const CH = ECanvas.Chest;
 const HE = ECanvas.Hero; 
 
-export const canvas = [
+export const map = [
     [WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL],
     [WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, DR, DR, WL, WL, WL, WL, WL],
     [WL, FL, CH, WL, FL, FL, FL, FL, WL, FL, FL, FL, FL, FL, FL, FL, WL, FL, FL, WL],

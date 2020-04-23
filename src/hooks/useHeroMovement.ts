@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useEventListener from '@use-it/event-listener';
-import { EDirection, canvas, ECanvas } from "../settings/constants";
+import { EDirection, ECanvas } from "../settings/constants";
+import { CanvasContext } from '../App';
 
 interface IPosition {
     x: number,
     y: number,
 }
 
-export const computeMovement = (nextPosition: IPosition) => {
+export const computeMovement = (canvas: ECanvas[][], nextPosition: IPosition) => {
     const nextValue = canvas[nextPosition.y][nextPosition.x];
 
-    const validCanvas = [ECanvas.Floor, ECanvas.Chest, ECanvas.Trap, ECanvas.MiniDemon, ECanvas.Demon, ECanvas.Door]
+    const validCanvas = [ECanvas.Floor]
     const dieCanvas = [ECanvas.Trap, ECanvas.MiniDemon, ECanvas.Demon];
 
     console.log(validCanvas.indexOf(nextValue));
@@ -28,10 +29,11 @@ interface IProps {
 }
 
 const useHeroMovement = (initialPosition: IProps)  => {
+    const positionX = initialPosition.x;
+    const positionY = initialPosition.y;
 
-    const [positionX, setPositionX] = useState(initialPosition.x);
-    const [positionY, setPositionY] = useState(initialPosition.y);
     const [direction, setDirection] = useState(1);
+    const { canvas, setCanvas } = useContext(CanvasContext);
 
     useEventListener('keydown', (e: any) => {
         let newX = positionX;
@@ -52,7 +54,7 @@ const useHeroMovement = (initialPosition: IProps)  => {
             newY = positionY + 1
         }
 
-        const movement = computeMovement({x:newX, y:newY});
+        const movement = computeMovement(canvas, {x:newX, y:newY});
         if (movement.die) {
             alert('Morreu labigó!');
         }
@@ -62,8 +64,14 @@ const useHeroMovement = (initialPosition: IProps)  => {
         }
 
         if (movement.isValid) {
-            setPositionX(newX);
-            setPositionY(newY);
+            const newCanvas = canvas;
+            const who = newCanvas[positionY][positionX];
+            newCanvas[positionY][positionX] = newCanvas[newY][newX];
+            newCanvas[newY][newX] = who;
+
+            console.log('who', who);
+            
+            setCanvas(newCanvas);
         }
     });
 
